@@ -2,39 +2,47 @@ package by.epam.tunnelthread.service;
 
 import by.epam.tunnelthread.constant.TrainDirection;
 import by.epam.tunnelthread.entity.Train;
+import org.apache.log4j.Logger;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 public class TrainService {
+    private static final Logger logger = Logger.getLogger(TrainService.class);
     private static final int TRAIN_TRAVEL_TIME = 5;
     private Train train;
-    private Callable<Train> trainCallable;
-    private ArrayList<Callable<Train>> callableArrayListOfTrains;
+    private Runnable trainCallable;
+    private ArrayList<Runnable> callableArrayListOfTrains;
+
+    public TrainService() {
+        callableArrayListOfTrains = new ArrayList<Runnable>();
+    }
 
     public TrainService(Train train) {
         this.train = train;
-        callableArrayListOfTrains = new ArrayList<Callable<Train>>();
+        callableArrayListOfTrains = new ArrayList<Runnable>();
     }
 
-    public ArrayList<Callable<Train>> getCallableArrayListOfTrains() {
+    public ArrayList<Runnable> getCallableArrayListOfTrains() {
         return callableArrayListOfTrains;
     }
 
     public void addTrainCallable(Train train) {
-        this.callableArrayListOfTrains.add(createTrainCallable(train));
+        this.callableArrayListOfTrains.add(createTrain());
     }
 
-    private Callable<Train> createTrainCallable(Train train) {
+    public Runnable createTrain() {
         return () -> {
-            Thread.currentThread().setName(train.getTrainName());
+            Train train = new Train(1);
+            //Thread.currentThread().setName(train.getTrainName());
+            logger.info(String.format("thread of %s started at %s", train.getTrainName(), LocalTime.now()));
             try {
                 TimeUnit.SECONDS.sleep(TRAIN_TRAVEL_TIME);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            return train;
         };
     }
 

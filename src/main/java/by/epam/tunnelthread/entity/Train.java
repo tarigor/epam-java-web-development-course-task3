@@ -4,13 +4,13 @@ import by.epam.tunnelthread.constant.TrainDirection;
 
 public class Train {
     private String trainName;
-    private int trainNumber;
+    private int trainNumber = 1;
     private TrainDirection trainDirection;
 
-    public Train() {
+    public Train(int trainNumber) {
         this.trainName = String.format("Train-%d", trainNumber);
         this.trainDirection = TrainDirection.getRandomDirection();
-        incrementTrainNumber();
+        this.trainNumber = trainNumber;
     }
 
     private void incrementTrainNumber() {
