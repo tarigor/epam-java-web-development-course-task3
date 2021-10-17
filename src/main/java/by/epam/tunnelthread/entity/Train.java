@@ -2,9 +2,14 @@ package by.epam.tunnelthread.entity;
 
 import by.epam.tunnelthread.constant.TrainDirection;
 
+/**
+ * Entity of train
+ *
+ * @author Igor Taren
+ */
 public class Train {
     private String trainName;
-    private int trainNumber = 1;
+    private int trainNumber;
     private TrainDirection trainDirection;
 
     public Train(int trainNumber) {

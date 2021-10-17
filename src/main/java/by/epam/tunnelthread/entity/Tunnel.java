@@ -1,46 +1,31 @@
 package by.epam.tunnelthread.entity;
 
+/**
+ * Entity of tunnel
+ *
+ * @author Igor Taren
+ */
 public class Tunnel {
     private String tunnelName;
-    private int amountOfAllowedTrainsInTunnel;
-    private int amountOfAllowedTrainsInTunnelInOneDirection;
+    private ThreadGroup threadGroup;
 
-    public Tunnel(String tunnelName, int amountOfAllowedTrainsInTunnel, int amountOfAllowedTrainsInTunnelInOneDirection) {
+    public Tunnel(String tunnelName) {
         this.tunnelName = tunnelName;
-        this.amountOfAllowedTrainsInTunnel = amountOfAllowedTrainsInTunnel;
-        this.amountOfAllowedTrainsInTunnelInOneDirection = amountOfAllowedTrainsInTunnelInOneDirection;
     }
 
     public String getTunnelName() {
         return tunnelName;
     }
 
-    public void setTunnelName(String tunnelName) {
-        this.tunnelName = tunnelName;
-    }
-
-    public int getAmountOfAllowedTrainsInTunnel() {
-        return amountOfAllowedTrainsInTunnel;
-    }
-
-    public void setAmountOfAllowedTrainsInTunnel(int amountOfAllowedTrainsInTunnel) {
-        this.amountOfAllowedTrainsInTunnel = amountOfAllowedTrainsInTunnel;
-    }
-
-    public int getAmountOfAllowedTrainsInTunnelInOneDirection() {
-        return amountOfAllowedTrainsInTunnelInOneDirection;
-    }
-
-    public void setAmountOfAllowedTrainsInTunnelInOneDirection(int amountOfAllowedTrainsInTunnelInOneDirection) {
-        this.amountOfAllowedTrainsInTunnelInOneDirection = amountOfAllowedTrainsInTunnelInOneDirection;
+    public ThreadGroup getThreadGroup() {
+        this.threadGroup = new ThreadGroup(tunnelName);
+        return threadGroup;
     }
 
     @Override
     public String toString() {
         return "Tunnel{" +
                 "tunnelName='" + tunnelName + '\'' +
-                ", amountOfAllowedTrainsInTunnel=" + amountOfAllowedTrainsInTunnel +
-                ", amountOfAllowedTrainsInTunnelInOneDirection=" + amountOfAllowedTrainsInTunnelInOneDirection +
                 '}';
     }
 }
