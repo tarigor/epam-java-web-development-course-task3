@@ -80,7 +80,7 @@ public class TunnelService {
         boolean ifDirectionDoNotExistInArray;
         Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
         for (Thread thread : threadSet) {
-            if (thread.getThreadGroup().getName().contains(tunnel.getName())) {
+            if (thread.getName().contains(tunnel.getName())) {
                 //check when all threads belong to certain direction will be passed out and remained only threads with other direction type
                 ifDirectionDoNotExistInArray = checkIfDirectionDoNotExistInArray(thread, trainArrayList);
                 if (thread.getName().contains(trainArrayList.get(randomTrain).getTrainDirection().toString()) || ifDirectionDoNotExistInArray) {
