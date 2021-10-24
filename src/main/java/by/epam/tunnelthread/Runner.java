@@ -1,7 +1,7 @@
 package by.epam.tunnelthread;
 
 import by.epam.tunnelthread.entity.Train;
-import by.epam.tunnelthread.entity.Tunnel;
+import by.epam.tunnelthread.service.PropertyFileService;
 import by.epam.tunnelthread.service.TrainService;
 import by.epam.tunnelthread.service.TunnelService;
 
@@ -10,14 +10,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Runner {
     public static void main(String[] args) {
 
-        Tunnel tunnelB = new Tunnel("tunnelB");
-        Tunnel tunnelA = new Tunnel("tunnelA");
+        int trainsAmountInTunnel = Integer.parseInt(
+                PropertyFileService.getInstance()
+                        .readFromPropertyFile("settings.properties")
+                        .getProperty("trains.amount.in.tunnel"));
 
         TrainService trainService = new TrainService();
         CopyOnWriteArrayList<Train> trainArrayList = trainService.getRandomizeCreatedTrainList();
 
-        TunnelService tunnelServiceTunnelA = new TunnelService(new ThreadGroup("tunnelA"), trainArrayList, 2);
-        TunnelService tunnelServiceTunnelB = new TunnelService(new ThreadGroup("tunnelB"), trainArrayList, 2);
+        TunnelService tunnelServiceTunnelA = new TunnelService(new ThreadGroup("tunnelA"), trainArrayList, trainsAmountInTunnel);
+        TunnelService tunnelServiceTunnelB = new TunnelService(new ThreadGroup("tunnelB"), trainArrayList, trainsAmountInTunnel);
 
         new Thread(tunnelServiceTunnelA::startTrainsTravelingInTunnel).start();
 

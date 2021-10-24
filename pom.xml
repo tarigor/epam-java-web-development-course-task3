@@ -7,6 +7,8 @@
     <properties>
         <jdk.version>11</jdk.version>
         <log4j.version>1.2.17</log4j.version>
+        <junit.version>4.13.2</junit.version>
+        <jupiter.version>5.7.2</jupiter.version>
     </properties>
 
     <groupId>by.epam</groupId>
@@ -18,6 +20,30 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>3.9.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vmlens</groupId>
+            <artifactId>concurrent-junit</artifactId>
+            <version>1.0.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>

@@ -1,6 +1,7 @@
 package by.epam.tunnelthread.service;
 
 import by.epam.tunnelthread.entity.Train;
+import by.epam.tunnelthread.thread.TrainThread;
 import org.apache.log4j.Logger;
 
 import java.time.LocalTime;
@@ -29,9 +30,9 @@ public class TunnelService {
     /**
      * Method starts the threads simulating the trains traveling.
      */
-    public void startTrainsTravelingInTunnel() {
+    public Thread startTrainsTravelingInTunnel() {
 
-        //the delay makes for having time to open visualvm application
+        //the delay makes for having a time to open visualvm application
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
@@ -39,6 +40,7 @@ public class TunnelService {
         }
 
         boolean firstThread = false;
+        Thread thread = null;
         while (trainArrayList.size() != 0) {
             int randomTrain = new Random().nextInt(trainArrayList.size());
             logger.info(String.format("The %s has been get randomly from array of trains with a direction -> %s",
@@ -52,7 +54,7 @@ public class TunnelService {
                     //simulate a different time of trains arriving into tunnel
                     generateRandomTimeDelay();
                     try {
-                        Thread thread = new Thread(tunnel, new TrainThread(tunnel.getName(), trainArrayList.get(randomTrain), semaphore));
+                        thread = new Thread(tunnel, new TrainThread(tunnel.getName(), trainArrayList.get(randomTrain), semaphore));
                         logger.info(String.format("Thread created for the %s", trainArrayList.get(randomTrain).getTrainName()));
                         thread.start();
                         trainArrayList.remove(randomTrain);
@@ -64,6 +66,7 @@ public class TunnelService {
                 e.printStackTrace();
             }
         }
+        return thread;
     }
 
     /**
@@ -73,7 +76,7 @@ public class TunnelService {
      * @param trainArrayList list of the Trains
      * @return result of the train direction for train currently traveling in the tunnel and train supposing to be next for traveling
      */
-    private boolean checkTrainDirectionFromTrainGroup(int randomTrain, CopyOnWriteArrayList<Train> trainArrayList) {
+    public boolean checkTrainDirectionFromTrainGroup(int randomTrain, CopyOnWriteArrayList<Train> trainArrayList) {
         boolean ifDirectionDoNotExistInArray;
         Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
         for (Thread thread : threadSet) {
@@ -95,7 +98,7 @@ public class TunnelService {
      * @param trainArrayList list of the remained Trains
      * @return result of check. If true - all trains with same direction have been passed and remained only trains with another type of direction
      */
-    private boolean checkIfDirectionDoNotExistInArray(Thread thread, CopyOnWriteArrayList<Train> trainArrayList) {
+    public boolean checkIfDirectionDoNotExistInArray(Thread thread, CopyOnWriteArrayList<Train> trainArrayList) {
         int amount = 0;
         for (Train train : trainArrayList) {
             //get direction type from the thread name

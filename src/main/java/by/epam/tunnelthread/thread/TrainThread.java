@@ -1,6 +1,7 @@
-package by.epam.tunnelthread.service;
+package by.epam.tunnelthread.thread;
 
 import by.epam.tunnelthread.entity.Train;
+import by.epam.tunnelthread.service.PropertyFileService;
 import org.apache.log4j.Logger;
 
 import java.time.LocalTime;
@@ -12,7 +13,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class TrainThread implements Runnable {
     private static final Logger logger = Logger.getLogger(TrainThread.class);
-    private static final int TRAIN_TRAVEL_TIME = 5;
+    private static final int TRAIN_TRAVEL_TIME = Integer.parseInt(
+            PropertyFileService.getInstance()
+                    .readFromPropertyFile("settings.properties")
+                    .getProperty("train.travel.time"));
     private Train train;
     private Semaphore semaphore;
     private String tunnelName;
