@@ -14,9 +14,13 @@ public class Runner {
                 PropertyFileService.getInstance()
                         .readFromPropertyFile("settings.properties")
                         .getProperty("trains.amount.in.tunnel"));
+        int totalTrainsAmount = Integer.parseInt(
+                PropertyFileService.getInstance()
+                        .readFromPropertyFile("settings.properties")
+                        .getProperty("total.trains.amount"));
 
         TrainService trainService = new TrainService();
-        CopyOnWriteArrayList<Train> trainArrayList = trainService.getRandomizeCreatedTrainList();
+        CopyOnWriteArrayList<Train> trainArrayList = trainService.getRandomizeCreatedTrainList(totalTrainsAmount);
 
         TunnelService tunnelServiceTunnelA = new TunnelService(new ThreadGroup("tunnelA"), trainArrayList, trainsAmountInTunnel);
         TunnelService tunnelServiceTunnelB = new TunnelService(new ThreadGroup("tunnelB"), trainArrayList, trainsAmountInTunnel);

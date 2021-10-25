@@ -13,6 +13,10 @@ public class TrainService {
 
     private CopyOnWriteArrayList<Train> trainArrayList;
 
+    public CopyOnWriteArrayList<Train> getTrainArrayList() {
+        return trainArrayList;
+    }
+
     public TrainService() {
     }
 
@@ -21,9 +25,9 @@ public class TrainService {
      *
      * @return ArrayList contains list of trains.
      */
-    public CopyOnWriteArrayList<Train> getRandomizeCreatedTrainList() {
+    public CopyOnWriteArrayList<Train> getRandomizeCreatedTrainList(int totalTrainsAmount) {
         trainArrayList = new CopyOnWriteArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < totalTrainsAmount; i++) {
             trainArrayList.add(new Train(i));
         }
         return trainArrayList;
