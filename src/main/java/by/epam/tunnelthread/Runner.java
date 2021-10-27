@@ -26,8 +26,6 @@ public class Runner {
         TunnelService tunnelServiceTunnelB = new TunnelService(new ThreadGroup("tunnelB"), trainArrayList, trainsAmountInTunnel);
 
         new Thread(tunnelServiceTunnelA::startTrainsTravelingInTunnel).start();
-
         new Thread(tunnelServiceTunnelB::startTrainsTravelingInTunnel).start();
-
     }
 }

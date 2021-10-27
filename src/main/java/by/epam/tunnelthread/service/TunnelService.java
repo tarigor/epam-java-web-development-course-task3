@@ -63,7 +63,7 @@ public class TunnelService {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error("Exception:", e);
             }
         }
         return thread;
@@ -107,8 +107,6 @@ public class TunnelService {
                 if (train.getTrainDirection().toString().contains(threadNameSeparated[5])) {
                     amount++;
                 }
-            } else {
-                amount++;
             }
         }
         if (amount == 0) {

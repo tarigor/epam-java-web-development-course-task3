@@ -47,7 +47,6 @@ public class PropertyFileService {
                     inputStream.close();
                 } catch (IOException e) {
                     log.error("Exception: " + e);
-                    e.printStackTrace();
                 }
             }
         }

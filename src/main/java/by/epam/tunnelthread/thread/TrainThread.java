@@ -54,7 +54,7 @@ public class TrainThread implements Runnable {
             TimeUnit.SECONDS.sleep(TRAIN_TRAVEL_TIME);
             logger.info(String.format("The train %s has been passed at %s", Thread.currentThread().getName(), LocalTime.now().toString()));
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error("Exception:",e);
         }
         semaphore.release();
     }
