@@ -17,7 +17,7 @@ class TunnelServiceTest {
         int amountOfTrainsInTunnelBSimultaneously = 4;
 
         TrainService trainService = new TrainService();
-        CopyOnWriteArrayList<Train> trainArrayList = trainService.getTrainArrayList();
+        CopyOnWriteArrayList<Train> trainArrayList = trainService.getRandomizeCreatedTrainList(20);
 
         TunnelService tunnelServiceTunnelA = new TunnelService(new ThreadGroup("tunnelA"), trainArrayList, amountOfTrainsInTunnelASimultaneously);
         TunnelService tunnelServiceTunnelB = new TunnelService(new ThreadGroup("tunnelB"), trainArrayList, amountOfTrainsInTunnelBSimultaneously);
